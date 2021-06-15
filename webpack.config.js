@@ -21,7 +21,8 @@ module.exports = {
       new CssMinimizerPlugin()
     ]
   },
-  mode: 'production', //development
+  // mode: 'development', //development production
+  mode: 'production', //development production
   entry: './src/index.js',
   output: {
     filename:'bundle.[hash:8].js',
@@ -32,11 +33,11 @@ module.exports = {
       {
         test: /\.css$/i,
         use: [
-          MiniCssExtractPlugin.loader,'css-loader']
+          MiniCssExtractPlugin.loader,'css-loader','postcss-loader']
       },
       {
         test: /\.less$/i,
-        use: [MiniCssExtractPlugin.loader,'css-loader','less-loader']
+        use: [MiniCssExtractPlugin.loader,'css-loader','postcss-loader','less-loader']
       }
     ]
   },
