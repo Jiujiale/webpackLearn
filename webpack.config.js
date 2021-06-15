@@ -47,7 +47,8 @@ module.exports = {
           options: {
             presets: ['@babel/preset-env'],
             plugins: [
-              ["@babel/plugin-proposal-decorators", { "legacy": true }]
+              ["@babel/plugin-proposal-decorators", { "legacy": true }],
+              "@babel/plugin-transform-runtime"
             ]
           }
         }
