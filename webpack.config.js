@@ -23,9 +23,12 @@ module.exports = {
   },
   // mode: 'development', //development production
   mode: 'production', //development production
-  entry: './src/index.js',
+  entry: {
+    'default': './src/index.js',
+    'newIndex': './src/newIndex.js'
+  },
   output: {
-    filename:'bundle.[hash:8].js',
+    filename:'[name].[hash:8].js',
     path: path.resolve(__dirname, 'build'),
     publicPath: '/'
   },
@@ -103,6 +106,17 @@ module.exports = {
         removeAttributeQuotes: true,
         collapseWhitespace: true
       },
+      chunks: ['default'],
+      hash: true
+    }),
+    new HtmlWebpackPlugin({
+      template: './src/newIndex.html',
+      filename: 'newIndex.html',
+      minify: {
+        removeAttributeQuotes: true,
+        collapseWhitespace: true
+      },
+      chunks: ['newIndex'],
       hash: true
     }),
     new MiniCssExtractPlugin({
