@@ -36,6 +36,7 @@ module.exports = {
   externals: {
     jquery: '$',
   },
+  // devtool: 'eval-cheap-source-map',
   module: {
     rules: [
       {
@@ -107,16 +108,6 @@ module.exports = {
         collapseWhitespace: true
       },
       chunks: ['default'],
-      hash: true
-    }),
-    new HtmlWebpackPlugin({
-      template: './src/newIndex.html',
-      filename: 'newIndex.html',
-      minify: {
-        removeAttributeQuotes: true,
-        collapseWhitespace: true
-      },
-      chunks: ['newIndex'],
       hash: true
     }),
     new MiniCssExtractPlugin({
