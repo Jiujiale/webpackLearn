@@ -1,3 +1,9 @@
+import $ from 'jquery'
+// import $ from "expose-loader?exposes=$!jquery";
+
+console.log($)
+console.log(window.$)
+
 let a = require('./a')
 console.log('hello')
 console.log(a.a)

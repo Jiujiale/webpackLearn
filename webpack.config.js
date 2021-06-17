@@ -3,7 +3,7 @@ const HtmlWebpackPlugin = require('html-webpack-plugin')
 const MiniCssExtractPlugin = require('mini-css-extract-plugin')
 const CssMinimizerPlugin = require('css-minimizer-webpack-plugin')
 const UglifyJsPlugin = require('uglifyjs-webpack-plugin')
-
+const webpack = require('webpack')
 
 module.exports = {
   devServer: {
@@ -28,8 +28,19 @@ module.exports = {
     filename:'bundle.[hash:8].js',
     path: path.resolve(__dirname, 'build')
   },
+  // 已经cdn 引用的包，去除import引用
+  externals: {
+    jquery: '$',
+  },
   module: {
     rules: [
+      {
+        test: require.resolve('jquery'),
+        loader: 'expose-loader',
+        options: {
+          exposes: '$'
+        }
+      },
       {
         test: /\.css$/i,
         use: [
@@ -56,6 +67,9 @@ module.exports = {
     ]
   },
   plugins: [
+    new webpack.ProvidePlugin({
+      $: 'jquery'
+    }),
     new HtmlWebpackPlugin({
       template: './src/index.html',
       filename: 'index.html',
