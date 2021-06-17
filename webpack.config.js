@@ -26,7 +26,8 @@ module.exports = {
   entry: './src/index.js',
   output: {
     filename:'bundle.[hash:8].js',
-    path: path.resolve(__dirname, 'build')
+    path: path.resolve(__dirname, 'build'),
+    publicPath: '/'
   },
   // 已经cdn 引用的包，去除import引用
   externals: {
@@ -34,6 +35,31 @@ module.exports = {
   },
   module: {
     rules: [
+      {
+        test: /\.(htm|html)$/i,
+        loader: 'html-withimg-loader'
+      },
+      {
+        test: /\.(png|jpe?g|gif)$/i,
+        use: [
+          // {
+          //   loader: 'file-loader',
+          //   options: {
+          //     esModule: false,
+          //     // outputPath: '/imgs/'
+          //   }
+          // },
+          {
+            loader: 'url-loader',
+            options: {
+              esModule: false,
+              limit: 8192,
+              outputPath: '/imgs/',
+              publicPath: '/imgs'
+            },
+          }
+        ],
+      },
       {
         test: require.resolve('jquery'),
         loader: 'expose-loader',
@@ -80,7 +106,7 @@ module.exports = {
       hash: true
     }),
     new MiniCssExtractPlugin({
-      filename: '[hash:8].css',
+      filename: 'css/[hash:8].css',
       insert: 'test'
     })
   ]

@@ -1,4 +1,9 @@
 body {
   background-color: red;
-  transform: rotate(20deg);
+  /* transform: rotate(20deg); */
+}
+
+.test_png {
+  color: red;
+  background: url('./1.png');
 }
