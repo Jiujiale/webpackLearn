@@ -41,11 +41,19 @@
 // console.log('flat', [11,[1,2]].flat())
 
 // 处理图片 
-import test_png from './1.png'
-require('./index.css')
-require('./index.less')
-let img = new Image()
-img.src = test_png
-console.log(img)
-console.log(test_png)
-document.body.appendChild(img)
+// import test_png from './1.png'
+// require('./index.css')
+// require('./index.less')
+// let img = new Image()
+// img.src = test_png
+// console.log(img)
+// console.log(test_png)
+// document.body.appendChild(img)
+
+// 环境变量
+if (DEV === 'dev') {
+  console.log('dev now')
+} else {
+  console.log('prod now')
+}
+console.log(DEV)
