@@ -51,9 +51,15 @@
 // document.body.appendChild(img)
 
 // 环境变量
-if (DEV === 'dev') {
-  console.log('dev now')
-} else {
-  console.log('prod now')
-}
-console.log(DEV)
+// if (DEV === 'dev') {
+//   console.log('dev now')
+// } else {
+//   console.log('prod now')
+// }
+// console.log(DEV)
+
+// 抽离公共代码
+import './a1'
+import './b1'
+console.log($)
+console.log('index.js ------')

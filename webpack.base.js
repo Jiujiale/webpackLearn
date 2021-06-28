@@ -7,6 +7,24 @@ const webpack = require('webpack')
 
 module.exports = {
   optimization: {
+    splitChunks: {
+      cacheGroups: {
+        common: {
+          name: 'common',
+          chunks: 'all', // all(同步异步都打包) initial(同步代码) async(异步代码)
+          minSize: 0,
+          minChunks: 2
+        },
+        vendor: {
+          priority: 1,
+          name: 'vendor',
+          test: /node_modules/,
+          chunks: 'all',
+          minSize: 0,
+          minChunks: 2
+        }
+      }
+    },
     minimizer: [
       new UglifyJsPlugin({
         cache: true,
@@ -23,12 +41,12 @@ module.exports = {
   output: {
     filename:'[name].[hash:8].js',
     path: path.resolve(__dirname, 'build'),
-    // publicPath: '/'
+    publicPath: '/'
   },
-  // 已经cdn 引用的包，去除import引用
-  externals: {
-    jquery: '$',
-  },
+  // 如果已经cdn 引用的包，去除import引用
+  // externals: {
+  //   jquery: '$',
+  // },
   module: {
     rules: [
       {
@@ -75,6 +93,7 @@ module.exports = {
       {
         test: /\.js$/i,
         exclude: /(node_modules|bower_components)/,
+        include: path.resolve('src'),
         use: {
           loader: 'babel-loader',
           options: {
